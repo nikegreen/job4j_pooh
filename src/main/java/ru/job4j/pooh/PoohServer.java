@@ -1,3 +1,6 @@
+/**
+ *  Created by Nike Z.
+ */
 package ru.job4j.pooh;
 
 import java.io.*;
@@ -9,9 +12,18 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * <p>PoohServer class.</p>
+ *
+ * @author nikez
+ * @version $Id: $Id
+ */
 public class PoohServer {
     private final HashMap<String, Service> modes = new HashMap<>();
 
+    /**
+     * <p>start.</p>
+     */
     public void start() {
         modes.put("queue", new QueueService());
         modes.put("topic", new TopicService());
@@ -45,6 +57,11 @@ public class PoohServer {
         }
     }
 
+    /**
+     * <p>main.</p>
+     *
+     * @param args an array of {@link java.lang.String} objects.
+     */
     public static void main(String[] args) {
         new PoohServer().start();
     }

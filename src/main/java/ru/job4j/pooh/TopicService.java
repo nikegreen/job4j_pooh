@@ -1,13 +1,23 @@
+/**
+ *  Created by Nike Z.
+ */
 package ru.job4j.pooh;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * service - handler GET/POST request of "topic".
+ *
+ * @author nikez
+ * @version $Id: $Id
+ */
 public class TopicService implements Service {
     private final static Map<String, ConcurrentHashMap<String, ConcurrentLinkedQueue<String>>>
             TOPIC = new ConcurrentHashMap<>();
 
+    /** {@inheritDoc} */
     @Override
     public Resp process(Req req) {
         String text = "Bad Request";

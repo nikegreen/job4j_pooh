@@ -44,7 +44,7 @@ public class Req {
         if (content == null || content.isEmpty()) {
             return null;
         }
-        String[] strings = content.split("\r\n");
+        String[] strings = content.split(System.lineSeparator());
         String head = strings[0];
         String[] heads = head.split(" ");
         String httpRequestType = heads[0];

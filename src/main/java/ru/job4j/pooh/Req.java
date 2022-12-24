@@ -11,8 +11,8 @@ package ru.job4j.pooh;
  */
 public class Req {
 
-    private final String httpRequestType;
-    private final String poohMode;
+    private final HttpMethod httpRequestType;
+    private final QueueMode poohMode;
     private final String sourceName;
     private final String param;
 
@@ -24,8 +24,8 @@ public class Req {
      * @param sourceName a {@link java.lang.String} object.
      * @param param a {@link java.lang.String} object.
      */
-    public Req(String httpRequestType,
-               String poohMode,
+    public Req(HttpMethod httpRequestType,
+               QueueMode poohMode,
                String sourceName,
                String param) {
         this.httpRequestType = httpRequestType;
@@ -47,20 +47,20 @@ public class Req {
         String[] strings = content.split(System.lineSeparator());
         String head = strings[0];
         String[] heads = head.split(" ");
-        String httpRequestType = heads[0];
-        String poohMode = null;
+        HttpMethod httpRequestType = HttpMethod.valueOf(heads[0]);
+        QueueMode poohMode = null;
         String sourceName = null;
         String param = null;
         if (heads.length > 1) {
             if (heads[1].startsWith("/queue/")) {
-                poohMode = "queue";
+                poohMode = QueueMode.queue;
                 sourceName = heads[1].substring(7);
-                if ("GET".equals(httpRequestType)) {
+                if (HttpMethod.GET.equals(httpRequestType)) {
                     param = "";
                 }
             } else if (heads[1].startsWith("/topic/")) {
-                poohMode = "topic";
-                if ("GET".equals(httpRequestType)) {
+                poohMode = QueueMode.topic;
+                if (HttpMethod.GET.equals(httpRequestType)) {
                     sourceName = heads[1].substring(7, heads[1].indexOf("/", 7));
                     param = heads[1].substring(heads[1].indexOf("/", 7) + 1);
                 } else {
@@ -83,7 +83,7 @@ public class Req {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String httpRequestType() {
+    public HttpMethod httpRequestType() {
         return httpRequestType;
     }
 
@@ -92,7 +92,7 @@ public class Req {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getPoohMode() {
+    public QueueMode getPoohMode() {
         return poohMode;
     }
 

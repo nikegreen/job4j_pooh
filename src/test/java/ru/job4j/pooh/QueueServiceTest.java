@@ -11,11 +11,17 @@ public class QueueServiceTest {
         String paramForPostMethod = "temperature=18";
         /* Добавляем данные в очередь weather. Режим queue */
         queueService.process(
-                new Req("POST", "queue", "weather", paramForPostMethod)
+                new Req(HttpMethod.POST,
+                        QueueMode.queue,
+                        "weather",
+                        paramForPostMethod)
         );
         /* Забираем данные из очереди weather. Режим queue */
         Resp result = queueService.process(
-                new Req("GET", "queue", "weather", null)
+                new Req(HttpMethod.GET,
+                        QueueMode.queue,
+                        "weather",
+                        null)
         );
         assertThat(result.text()).isEqualTo("temperature=18");
     }
@@ -27,20 +33,31 @@ public class QueueServiceTest {
         String paramForPostMethod2 = "temperature=29";
         /* Добавляем данные в очередь weather. Режим queue */
         queueService.process(
-                new Req("POST", "queue", "weather", paramForPostMethod1)
+                new Req(HttpMethod.POST, QueueMode.queue,
+                        "weather",
+                        paramForPostMethod1)
         );
         /* Добавляем данные в очередь weather. Режим queue */
         queueService.process(
-                new Req("POST", "queue", "weather", paramForPostMethod2)
+                new Req(HttpMethod.POST,
+                        QueueMode.queue,
+                        "weather",
+                        paramForPostMethod2)
         );
         /* Забираем данные из очереди weather. Режим queue */
         Resp result1 = queueService.process(
-                new Req("GET", "queue", "weather", null)
+                new Req(HttpMethod.GET,
+                        QueueMode.queue,
+                        "weather",
+                        null)
         );
         assertThat(result1.text()).isEqualTo("temperature=18");
         /* Забираем данные из очереди weather. Режим queue */
         Resp result2 = queueService.process(
-                new Req("GET", "queue", "weather", null)
+                new Req(HttpMethod.GET,
+                        QueueMode.queue,
+                        "weather",
+                        null)
         );
         assertThat(result2.text()).isEqualTo("temperature=29");
     }

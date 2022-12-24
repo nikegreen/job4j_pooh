@@ -26,7 +26,7 @@ public class TopicService implements Service {
             text = "Bad Request";
             status = "404";
             String name = req.getSourceName();
-            if ("POST".equals(req.httpRequestType())) {
+            if (HttpMethod.POST.equals(req.httpRequestType())) {
                 if (TOPIC.get(name) != null) {
                     for (ConcurrentLinkedQueue<String> queue: TOPIC.get(name).values()) {
                         queue.add(req.getParam());
@@ -34,7 +34,7 @@ public class TopicService implements Service {
                 }
                 text = name + ":" + req.getParam() + ":OK";
                 status = "200";
-            } else if ("GET".equals(req.httpRequestType())) {
+            } else if (HttpMethod.GET.equals(req.httpRequestType())) {
                 TOPIC.putIfAbsent(name, new ConcurrentHashMap<>());
                 TOPIC.get(name).putIfAbsent(req.getParam(), new ConcurrentLinkedQueue<>());
                 text = TOPIC.get(name).get(req.getParam()).poll();

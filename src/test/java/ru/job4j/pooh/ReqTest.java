@@ -19,8 +19,8 @@ public class ReqTest {
                 + "Content-Type: application/x-www-form-urlencoded" + ls
                 + "" + ls + "temperature=18" + ls;
         Req req = Req.of(content);
-        assertThat(req.httpRequestType()).isEqualTo("POST");
-        assertThat(req.getPoohMode()).isEqualTo("queue");
+        assertThat(req.httpRequestType()).isEqualTo(HttpMethod.POST);
+        assertThat(req.getPoohMode()).isEqualTo(QueueMode.queue);
         assertThat(req.getSourceName()).isEqualTo("weather");
         assertThat(req.getParam()).isEqualTo("temperature=18");
     }
@@ -33,8 +33,8 @@ public class ReqTest {
                 + "User-Agent: curl/7.72.0" + ls
                 + "Accept: */*" + ls + ls + ls;
         Req req = Req.of(content);
-        assertThat(req.httpRequestType()).isEqualTo("GET");
-        assertThat(req.getPoohMode()).isEqualTo("queue");
+        assertThat(req.httpRequestType()).isEqualTo(HttpMethod.GET);
+        assertThat(req.getPoohMode()).isEqualTo(QueueMode.queue);
         assertThat(req.getSourceName()).isEqualTo("weather");
         assertThat(req.getParam()).isEqualTo("");
     }
@@ -50,8 +50,8 @@ public class ReqTest {
                 + "Content-Type: application/x-www-form-urlencoded" + ls + ls
                 + "temperature=18" + ls;
         Req req = Req.of(content);
-        assertThat(req.httpRequestType()).isEqualTo("POST");
-        assertThat(req.getPoohMode()).isEqualTo("topic");
+        assertThat(req.httpRequestType()).isEqualTo(HttpMethod.POST);
+        assertThat(req.getPoohMode()).isEqualTo(QueueMode.topic);
         assertThat(req.getSourceName()).isEqualTo("weather");
         assertThat(req.getParam()).isEqualTo("temperature=18");
     }
@@ -64,8 +64,8 @@ public class ReqTest {
                 + "User-Agent: curl/7.72.0" + ls
                 + "Accept: */*" + ls + ls + ls;
         Req req = Req.of(content);
-        assertThat(req.httpRequestType()).isEqualTo("GET");
-        assertThat(req.getPoohMode()).isEqualTo("topic");
+        assertThat(req.httpRequestType()).isEqualTo(HttpMethod.GET);
+        assertThat(req.getPoohMode()).isEqualTo(QueueMode.topic);
         assertThat(req.getSourceName()).isEqualTo("weather");
         assertThat(req.getParam()).isEqualTo("client407");
     }

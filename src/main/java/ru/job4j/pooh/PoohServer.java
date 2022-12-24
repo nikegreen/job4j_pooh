@@ -19,14 +19,14 @@ import java.util.concurrent.Executors;
  * @version $Id: $Id
  */
 public class PoohServer {
-    private final HashMap<String, Service> modes = new HashMap<>();
+    private final HashMap<QueueMode, Service> modes = new HashMap<>();
 
     /**
      * <p>start.</p>
      */
     public void start() {
-        modes.put("queue", new QueueService());
-        modes.put("topic", new TopicService());
+        modes.put(QueueMode.queue, new QueueService());
+        modes.put(QueueMode.topic, new TopicService());
         ExecutorService pool = Executors.newFixedThreadPool(
                 Runtime.getRuntime().availableProcessors()
         );
